@@ -9,4 +9,3 @@ Atividades da disciplina MC322 - Programação Orientada à Objetos, 1 semestre 
 # Curso
 * Engenharia Elétrica
 
-<hr>
