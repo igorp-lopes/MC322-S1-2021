@@ -2,41 +2,41 @@ package mc322.lab03;
 
 public class AquarioLombriga {
 	
-	int tamAquario, tamLombriga, posLombriga, posCauda;
+	int tamAquario, tamLombriga, posCabeca, posCauda;
 	
-	// Variável de controle que, quando verdadeira, indica que a lombriga está virada para a direita
+	// Variavel de controle que, quando verdadeira, indica que a lombriga esta
+	// virada para a direita
 	boolean direita; 
 	
-	AquarioLombriga(int tamAquario, int tamLombriga, int posLombriga){
+	AquarioLombriga(int tamAquario, int tamLombriga, int posCauda) {
 		this.tamAquario = tamAquario;
 		this.tamLombriga = tamLombriga;
 		
-		// Condição de contorno: lombriga maior do que o aquário
+		// Condicao de contorno: lombriga maior do que o aquario
 		if(this.tamAquario < this.tamLombriga) {
 			this.tamAquario = this.tamLombriga;
 		}
 		
-		this.posLombriga = posLombriga;
-		posCauda = posLombriga - (tamLombriga - 1);
-		
-		// Condição de contorno: posição inicial da lombriga não a comporta no aquário
-		if(posCauda < 1) {
-			this.posLombriga = this.tamLombriga;
+		this.posCauda = posCauda;
+
+		// Condicao de contorno: posicao inicial da lombriga nao a comporta no aquario
+		if ((posCauda < 1) || (posCauda > tamAquario)) {
 			posCauda = 1;
 		}
-		
+
+		posCabeca = posCauda + (tamLombriga - 1);
 		direita = true;
 	}
 	
 	void crescer(){
-		// Se há espaço para a lombriga crescer e ela está virada para a direita
+		// Se ha espaco para a lombriga crescer e ela esta virada para a direita
 		if((direita) && (posCauda > 1)) {
 			tamLombriga++;
 			posCauda--;
 			return;
 		}
 		
-		// Se há espaço para a lombriga crescer e ela está virada para a esquerda
+		// Se ha espaco para a lombriga crescer e ela esta virada para a esquerda
 		if(!(direita) && (posCauda < tamAquario)) {
 			tamLombriga++;
 			posCauda++;
@@ -46,52 +46,53 @@ public class AquarioLombriga {
 	}
 	
 	void mover() {
-		// Se a lombriga está virada para a direita
+		// Se a lombriga esta virada para a direita
 		if(direita) {
 			
-			// Se estamos no limite do aquário
-			if(posLombriga == tamAquario) {
+			// Se estamos no limite do aquario
+			if (posCabeca == tamAquario) {
 				virar();
 				return;
 			}
 			
-			posLombriga++;
+			posCabeca++;
 			posCauda++;
 		}
 		
-		// Se a lombriga está virada para a esquerda
+		// Se a lombriga esta virada para a esquerda
 		else {
 			
-			// Se estamos no limite do aquário
-			if(posLombriga == 1) {
+			// Se estamos no limite do aquario
+			if (posCabeca == 1) {
 				virar();
 				return;
 			}
 			
-			posLombriga--;
+			posCabeca--;
 			posCauda--;
 		}
 	}
 	
 	void virar() {
-		// Salvamos temporariamente as posições originais da cabeça e da cauda
-		int cabecaOrig = posLombriga;
+		// Salvamos temporariamente as posicoes originais da cabeca e da cauda
+		int cabecaOrig = posCabeca;
 		int caudaOrig = posCauda;
 		
-		// Invertemos as posições da cabeça e da cauda e aplicamos o toggle na variável de posição
-		posLombriga = caudaOrig;
+		// Invertemos as posicoes da cabeca e da cauda e aplicamos o toggle na variavel
+		// de posicao
+		posCabeca = caudaOrig;
 		posCauda = cabecaOrig;
 		
 		direita = !direita;
 	}
 	
 	String criaLombriga() {
-		// Método auxiliar usado para criar a representação em string da lombriga
+		// Metodo auxiliar usado para criar a representacao em string da lombriga
 		
 		String lombriga = "";
 		char pedaco = '@';
 		
-		// Se a lombriga está virada para a direita
+		// Se a lombriga esta virada para a direita
 		if(direita) {
 			for(int i = 0; i < (tamLombriga - 1); i++) {
 				lombriga += pedaco;
@@ -99,7 +100,7 @@ public class AquarioLombriga {
 			lombriga += 'O';
 		}
 		
-		// Se a lombriga está virada para a esquerda
+		// Se a lombriga esta virada para a esquerda
 		else {
 			lombriga += 'O';
 			for(int i = 1; i < tamLombriga; i++) {
@@ -115,14 +116,14 @@ public class AquarioLombriga {
 		String aquario = "";
 		char vazio = '#';
 		
-		// Criamos a representação da lombriga
+		// Criamos a representacao da lombriga
 		String lombriga = criaLombriga();
 		
-		for(int i = 1; i < tamAquario; i++) {
-			// Quando encontramos a posição para inserir a lombriga
-			if((i == posCauda) || (i == posLombriga)) {
+		for (int i = 1; i <= tamAquario; i++) {
+			// Quando encontramos a posicao para inserir a lombriga
+			if ((i == posCauda) || (i == posCabeca)) {
 				aquario += lombriga;
-				i += tamLombriga;
+				i += tamLombriga - 1;
 				continue;
 			}
 			
