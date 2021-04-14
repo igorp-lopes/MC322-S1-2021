@@ -5,3 +5,5 @@ Implementação de classes para desenvolver a movimentação de uma lombriga den
 ## Notebook
 [Link para o notebook com as atividades](https://github.com/igorp-lopes/MC322-S1-2021/blob/main/lab03/notebook/lab-lombriga-ra174929.ipynb)
 
+## Arquivos Java
+[Link para a pasta que contém os arquivos java da atividade](https://github.com/igorp-lopes/MC322-S1-2021/tree/main/lab03/src/mc322/lab03)
